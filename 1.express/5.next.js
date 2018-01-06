@@ -1,6 +1,7 @@
 // 中间件的作用
 // 1.next函数可以决定是否向下执行
-// 2.next函数可以传递错误
+// 2.next函数可以传递错误 错误中间件有四个参数
+// 3.可以将公共逻辑放到中间件内
 function app(req,res) {
     let index = 0;
     function next(err) {
@@ -15,7 +16,7 @@ function app(req,res) {
             app.routes[index++](req,res,next);
         }
     }
-    next()
+    next();
 }
 app.routes = [];
 app.use = function (fn) {
