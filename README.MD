@@ -22,3 +22,8 @@ app.use(static('./'));
 ```
 res.render('hello.ejs');
 ```
+
+- =表示取值
+- \-表示转义
+- include引用
+- <%%>表示js语法

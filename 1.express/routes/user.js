@@ -4,7 +4,7 @@ router.get('/',function (req,res) {
     res.send('user')
 });
 router.get('/login',function (req,res) {
-    res.render('hello.ejs',{val:'我非常帅',a:'<h1>珠峰培训</h1>',school:{name:'zf',age:8}});
+    res.render('hello.html',{val:'我非常帅',a:'<h1>珠峰培训</h1>',school:{name:'zf',age:8}});
 });
 
 router.get('/reg',function (req,res) {

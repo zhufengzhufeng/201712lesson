@@ -6,10 +6,14 @@
 <body>
 登录模板
 <%-a%>
-
 <%Object.keys(school).forEach(item=>{%>
     <li><%=school[item]%></li>
 <%})%>
-
+<%if(false){%>
+    <p>你好</p>
+<%}else{%>
+    <p>不好</p>
+<%}%>
+<%include a.html%>
 </body>
 </html>
