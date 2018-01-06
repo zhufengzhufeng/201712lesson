@@ -13,3 +13,12 @@
 - 解析请求体 -> 对象 req.body
 
 ## express.static
+```
+app.use(static('./'));
+```
+
+## ejs渲染
+- 渲染某个页面直接写文件名即可
+```
+res.render('hello.ejs');
+```
