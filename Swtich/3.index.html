@@ -9,6 +9,8 @@
 <script>
   // 1.我们将字符串进行封装：字符串不能绑定事件
   // 2.将字符串变换成dom元素
+  // 3.提取公用的类,如果想渲染dom 可以通过setState
+  // 4.模拟实现了一个渲染的方法
   class Component {
       createDOMFromString(str){
           let oDiv = document.createElement('div');
@@ -26,6 +28,9 @@
           this.el.firstElementChild.addEventListener('change',this.Change.bind(this),false);
           return this.el;
       }
+      mount(container){ // 用来将元素添加到页面上
+        container.appendChild(this._render());
+      }
   }
   class Switch extends Component{
     constructor(){
@@ -33,7 +38,9 @@
         this.state = {turn:false}
     }
     Change(){ // this就是实例
-        this.setState({turn:!this.state.turn});
+        setTimeout(()=>{
+            this.setState({turn:!this.state.turn});
+        },300);
     }
     render(){
         return `
@@ -45,8 +52,11 @@
     }
   }
   let app = document.querySelector('.app');
-  app.appendChild(new Switch()._render());
-  app.appendChild(new Switch()._render());
+  let render = (ele,container)=>{
+    ele.mount(container);
+  };
+  render(new Switch(),app)
+
 </script>
 <style>
   .switch{
