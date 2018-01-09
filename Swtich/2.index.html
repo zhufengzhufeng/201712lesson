@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>珠峰培训 http://www.zhufengpeixun.cn</title>
+</head>
+<body>
+<div class="app"></div>
+<script>
+  // 1.我们将字符串进行封装：字符串不能绑定事件
+  // 2.将字符串变换成dom元素
+  class Switch{
+    constructor(){
+        this.state = {turn:false}
+    }
+    createDOMFromString(str){
+      let oDiv = document.createElement('div');
+      oDiv.innerHTML = str;
+      return oDiv.firstElementChild;
+    }
+    Change(){ // this就是实例
+      Object.assign(this.state,{turn:!this.state.turn}); //this.state={...this.state,...{turn:!this.state.turn}}
+      let oldEl = this.el;
+      let newEl = this.render(); // 渲染一个新的元素
+      oldEl.parentNode.replaceChild(newEl,oldEl); // 将老的替换成新的
+    }
+    render(){
+        this.el = this.createDOMFromString(`
+            <div>
+                  <input type="checkbox" class="switch" ${this.state.turn?'checked':''}>
+                  <p class="text">${this.state.turn?'开':'关'}</p>
+            </div>
+        `);
+        this.el.firstElementChild.addEventListener('change',this.Change.bind(this),false);
+        return this.el;
+    }
+  }
+  let app = document.querySelector('.app');
+  app.appendChild(new Switch().render());
+  app.appendChild(new Switch().render());
+</script>
+<style>
+  .switch{
+    -webkit-appearance: none;
+    width:50px;
+    border: 1px solid #dfdfdf;
+    border-radius: 30px;
+    height: 32px;
+    position: relative;
+    outline: none;
+    transition: all 0.2s linear
+  }
+  .switch:checked{
+    box-shadow: #343cff 0 0 16px 16px inset ;
+    transition: all 0.2s linear
+  }
+  .switch:before{
+    content:'';
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px 0 #dfdfdf;
+    background: #fff;
+    transition:all 0.2s linear;
+  }
+  .switch:checked:before{
+    left: 20px;
+    transition:all 0.2s linear;
+  }
+</style>
+</body>
+</html>
