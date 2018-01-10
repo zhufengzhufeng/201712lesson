@@ -25,8 +25,8 @@ class Panel extends Component{
 }
 class Header extends Component{
     handleClick = ()=>{
-        this.props.change('danger');
-    }
+        this.props.change('danger'); //调用父亲的方法
+    };
     render(){return (
         <div className="panel-heading">
             {this.props.head} <button className="btn btn-danger" onClick={this.handleClick}>改颜色</button>

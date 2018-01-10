@@ -1,1 +1,1 @@
-import './history/5.child-parent';
+import './history/7.control-sum';
