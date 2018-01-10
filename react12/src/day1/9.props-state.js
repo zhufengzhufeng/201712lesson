@@ -11,7 +11,7 @@ class School extends React.Component{ // 类上的属性就叫静态属性
         name:'珠峰',
         age:1
     }; // 默认属性
-    constructor(props){ //如果想在构造函数中拿到属性需要通过参数的方式
+    constructor(){ //如果想在构造函数中拿到属性需要通过参数的方式
          //不能在组件中更改属性 不能修改属性*
         super();
     }
