@@ -67,3 +67,17 @@ class ChildCounter extends Component{
   }
 }
 ReactDOM.render(<Counter name="计数器"/>,window.root);
+
+// defaultProps
+// constructor
+// componentWillMount
+// render
+// componentDidMount
+// 状态更新会触发的
+// shouldComponentUpdate nextProps,nextState=>boolean
+// componentWillUpdate
+// componentDidUpdate
+// 属性更新
+// componentWillReceiveProps newProps
+// 卸载
+// componentWillUnmount
