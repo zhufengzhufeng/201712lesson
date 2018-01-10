@@ -37,13 +37,16 @@ class Counter extends React.Component{ // 他会比较两个状态相等就不�
     return (
       <div>
         <p>{this.state.number}</p>
-        <ChildCounter n={this.state.number}/>
+        {this.state.number>3?null:<ChildCounter n={this.state.number}/>}
         <button onClick={this.handleClick}>+</button>
       </div>
     )
   }
 }
 class ChildCounter extends Component{
+  componentWillUnmount(){
+    console.log('组件将要卸载componentWillUnmount')
+  }
   componentWillMount(){
     console.log('child componentWillMount')
   }
