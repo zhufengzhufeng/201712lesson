@@ -16,7 +16,9 @@ class Sum extends Component{
             <div onChange={this.handleChange}>
                 <input type="number" ref="a"/>
                 {/*x代表的真实的dom,把元素挂载在了当前实例上*/}
-                <input type="number" ref={x=>this.b = x}/>
+                <input type="number" ref={(x)=>{
+                    this.b = x;
+                }}/>
                 {this.state.result}
             </div>
         )
