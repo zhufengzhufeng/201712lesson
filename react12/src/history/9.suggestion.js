@@ -19,18 +19,31 @@ class Search extends Component {
   }
   handleChange = async (e) =>{
     let wd = e.target.value;
+    this.wd = wd; //保存输入的内容
     let {s} = await jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+wd,{param:'cb'});
     this.setState({val:wd,arr:s});
   };
   changeIndex =(e)=>{
     let index = this.state.index;// 默认的索引
     if(e.keyCode===38 || e.keyCode===40){
+      e.preventDefault(); //阻止默认行为
       if(e.keyCode === 38){
         index--;
+        if(index === -2 ){ // 目前在-1 --变成了-2 回到最后一个
+          index = this.state.arr.length-1;
+        }
       }else{
         index++;
+        if(index ===this.state.arr.length){ //当越界了 回到-1
+          index = -1;
+        }
       }
-      this.setState({index})
+      this.setState({index,val:this.state.arr[index]||this.wd});
+    }
+  };
+  enter = (e)=>{
+    if(e.keyCode === 13){
+      window.open('https://www.baidu.com/s?wd='+this.state.val)
     }
   };
   render() {
@@ -38,7 +51,7 @@ class Search extends Component {
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <input type="text" className="form-control" value={this.state.val} onChange={this.handleChange} onKeyDown={this.changeIndex}/>
+            <input type="text" className="form-control" value={this.state.val} onChange={this.handleChange} onKeyDown={this.changeIndex} onKeyUp={this.enter}/>
           </div>
           <div className="panel-body">
             <ul className="list-group">
