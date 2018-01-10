@@ -81,3 +81,5 @@ ReactDOM.render(<Counter name="计数器"/>,window.root);
 // componentWillReceiveProps newProps
 // 卸载
 // componentWillUnmount
+
+// webpack基础配置+轮播图
