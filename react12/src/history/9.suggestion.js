@@ -15,24 +15,35 @@ function jsonp(url,opts={}) {
 class Search extends Component {
   constructor(){
     super();
-    this.state = {val:'',arr:[]} //val是输入框的内容 arr是所有数据列表
+    this.state = {val:'',arr:[],index:-1} //val是输入框的内容 arr是所有数据列表
   }
   handleChange = async (e) =>{
     let wd = e.target.value;
     let {s} = await jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+wd,{param:'cb'});
     this.setState({val:wd,arr:s});
   };
+  changeIndex =(e)=>{
+    let index = this.state.index;// 默认的索引
+    if(e.keyCode===38 || e.keyCode===40){
+      if(e.keyCode === 38){
+        index--;
+      }else{
+        index++;
+      }
+      this.setState({index})
+    }
+  };
   render() {
     return (
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <input type="text" className="form-control" value={this.state.val} onChange={this.handleChange}/>
+            <input type="text" className="form-control" value={this.state.val} onChange={this.handleChange} onKeyDown={this.changeIndex}/>
           </div>
           <div className="panel-body">
             <ul className="list-group">
               {this.state.arr.map((item,index)=>(
-                <li className="list-group-item" key={index}>{item}</li>
+                <li className={(this.state.index === index?'active':'')+" list-group-item"} key={index}>{item}</li>
               ))}
             </ul>
           </div>
