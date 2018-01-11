@@ -20,7 +20,14 @@ export default class Slider extends React.Component {
       return;//因为设置了setTimeout所以要等待setTimeout后再设置最新状态
     }
     if(index<0){ // 当小于第一张时 回到最后一张
-      index = this.props.items.length - 1;
+      this.$ul.style.transitionDuration = ''; //清除ul上的动画
+      this.$ul.style.left = this.props.items.length*-1*400+'px';
+      setTimeout(()=>{
+        this.$ul.style.transitionDuration = this.props.speed+'s';
+        index = this.props.items.length-1;
+        this.setState({index});
+      },30);
+      return;
     }
     this.setState({
       index
