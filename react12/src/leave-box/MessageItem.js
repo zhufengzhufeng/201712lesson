@@ -11,7 +11,6 @@ export default class MessageItem extends React.Component {
                 }}>
           &times;</button>
         <span className="pull-right">时间:{new Date(createAt).toLocaleString()}</span>
-
       </li>
     )
   }

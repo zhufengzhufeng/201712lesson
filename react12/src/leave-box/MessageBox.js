@@ -5,13 +5,14 @@ import MessageForm from "./MessageForm";
 export default class MessageBox extends React.PureComponent {
   constructor(){
     super();
-    this.state = {messages:[{id:1,content:'今天吃药了吗？',auth:'珠峰培训',createAt:Date.now()}]}
+    this.state = {messages:[]}
   }
   deleteMessage = (id) =>{ // 根据id进行删除
     let messages = this.state.messages.filter(item=>item.id!=id);
     this.setState({ // 重新设置状态
       messages:messages
     });
+    localStorage.setItem('messages',JSON.stringify(messages));
   };
   addMessage =(message)=>{ // message是儿子传递过来的,实现子父传递
     let messageItem = {...message,id:Math.random(),createAt:Date.now()};
@@ -20,8 +21,15 @@ export default class MessageBox extends React.PureComponent {
     this.setState({
       messages
     }); //放到状态中
+    localStorage.setItem('messages',JSON.stringify(messages));
   };
+  // 生命周期是同步的 再componentWillMount中setState是同步的
+  componentWillMount(){ //取localStorage的值时 取到后放在状态中 再进行render 执行一次，willMount中的setState会和this.state状态合并
+     let messages = JSON.parse(localStorage.getItem('messages')) || [];
+     this.setState({messages});
+  }
   render(){
+    console.log('render')
     return (
       <div className="container">
         <div className="row">
