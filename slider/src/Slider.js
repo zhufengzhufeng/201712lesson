@@ -1,6 +1,7 @@
 import React from 'react';
 import SliderList from "./SliderList";
 import SliderArrows from "./SliderArrows";
+import SliderDots from "./SliderDots";
 export default class Slider extends React.Component {
   constructor(){
     super();
@@ -29,13 +30,16 @@ export default class Slider extends React.Component {
     }
   }
   render(){
+    console.log(1)
     return (
       <div className="slider-container" onMouseEnter={()=>{
         clearInterval(this.timer);
       }} onMouseLeave={()=>{this.turn();}}>
         <SliderList index={this.state.index} items={this.props.items} speed={this.props.speed}/>
-        {this.props.arrows?<SliderArrows/>:null}
+        {this.props.arrows?<SliderArrows go={this.go}/>:null}
+        {this.props.dots?<SliderDots go={this.go} items={this.props.items} index={this.state.index}/>:null}
       </div>
+
     )
   }
 }
