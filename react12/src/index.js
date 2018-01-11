@@ -1,1 +1,1 @@
-import './leave-box/index';
+import './day3/1.children';
