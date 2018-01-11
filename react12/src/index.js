@@ -1,1 +1,1 @@
-import './history/10.lifecycle';
+import './leave-box/index';
