@@ -1,11 +1,13 @@
 import React from 'react';
+import MessageItem from "./MessageItem";
 export default class MessageList extends React.Component {
   render(){
     return (
       <ul className="list-group">
-        <li className="list-group-item">
-          留言人:珠峰培训 内容:明天放假 时间:xxxx
-        </li>
+        {/*item(auth content id createAt)*/}
+        {this.props.messages.map((item,index)=>(
+            <MessageItem key={index} {...item}/>
+        ))}
       </ul>
     )
   }
