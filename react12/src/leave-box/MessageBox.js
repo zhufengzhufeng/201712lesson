@@ -7,6 +7,12 @@ export default class MessageBox extends React.PureComponent {
     super();
     this.state = {messages:[{id:1,content:'今天吃药了吗？',auth:'珠峰培训',createAt:Date.now()}]}
   }
+  deleteMessage = (id) =>{ // 根据id进行删除
+    let messages = this.state.messages.filter(item=>item.id!=id);
+    this.setState({ // 重新设置状态
+      messages:messages
+    });
+  };
   addMessage =(message)=>{ // message是儿子传递过来的,实现子父传递
     let messageItem = {...message,id:Math.random(),createAt:Date.now()};
     //this.state.messages.push(messageItem); //不会更新,不会改变原有的引用地址
@@ -25,7 +31,7 @@ export default class MessageBox extends React.PureComponent {
                 <h1 className="text-center h3">珠峰留言板</h1>
               </div>
               <div className="panel-body">
-                <MessageList  messages={this.state.messages}/>
+                <MessageList  messages={this.state.messages} delete={this.deleteMessage}/>
               </div>
               <div className="panel-footer">
                 <MessageForm add={this.addMessage}/>

@@ -4,6 +4,7 @@ export default class MessageForm extends React.Component {
     e.preventDefault(); //阻止表单的提交
     let message = {auth:this.auth.value,content:this.content.value};
     this.props.add(message);// 调用父组件的方法 将值传递到父组件中
+    //this.auth.value = this.content.value = '' 清空输入框
   };
   render(){
     return (
