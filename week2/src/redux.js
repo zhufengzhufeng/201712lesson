@@ -17,4 +17,14 @@ function createStore(reducer) { // reducer是外界传入的，可以让reducer�
   dispatch({}); // 初始化redux的默认状态
   return {getState,subscribe,dispatch}
 }
-export {createStore}
+let combineReducers = (reducers) =>{ // reducers{counter:fn,todo:fn}
+  return (state={},action)=>{
+    let obj = {};// 最终的状态
+    for(let key in reducers){
+      obj[key] = reducers[key](state[key],action); // obj.counter = {number:0}
+      // obj.todo = []
+    }
+    return obj;
+  }
+};
+export {createStore,combineReducers}
