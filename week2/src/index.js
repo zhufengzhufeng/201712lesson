@@ -1,8 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React,{Component} from 'react'
+import ReactDOM,{render} from 'react-dom';
+import Counter from "./components/Counter";
+import Compute from "./components/Compute";
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+
+ReactDOM.render(<div>
+  <Counter/>
+  <Compute/>
+</div>,window.root);

@@ -1,42 +1,42 @@
-function createStore(r) {
-  let state; //此时默认还是undefined
-  function dispatch(action) { //派发
-    state = r(state,action);
-    listeners.forEach(item=>item());
+const CHANGE_TITLE_TEXT = 'change_title_text';
+function createStore(reducer) {
+  let state;
+  function dispatch(action) {
+    state = reducer(state,action); //调用写好的方法，这个方法会返回一个新的状态
   }
-  let listeners = [];// 存放所有的监听函数
-  let subscribe = (fn)=>{
-    listeners.push(fn);
-    return ()=>{ //取消绑定的函数，调用可以删除函数
-      listeners = listeners.filter(item=>item!==fn);
-    }
-  };
-  dispatch({});//目的是用用户的状态覆盖掉自身的状态
+  dispatch({});
   let getState = () => JSON.parse(JSON.stringify(state));
-  return {getState,dispatch,subscribe}
+  return {getState,dispatch}
 }
-const CHANGE_TITLE = 'change_title';
-function reducer(state={title:'标题'},action) {
+let initState = {
+  titleState:{color:'red',text:'标题'},
+  contentState:{color:'green',text:'内容'}
+};
+let store = createStore(reducer); //创建容器时需要传递一个管理员
+function reducer(state=initState,action) { //管理员，负责如何更改状态的
   switch (action.type){
-    case CHANGE_TITLE:
-      return {...state,title:action.content}
+    case CHANGE_TITLE_TEXT:
+      return {...state,titleState:{...state.titleState,text:action.text}};
   }
   return state;
 }
-let store = createStore(reducer);
-function render() {
-  document.querySelector('.title').innerHTML = store.getState().title
-}
-render();
-store.subscribe(render);
-let unSubscribe = store.subscribe(function () {
-  alert(1)
-});
-setTimeout(function () {
-  store.dispatch({type:CHANGE_TITLE,content:'珠峰'});
-  unSubscribe();
-},2000);
-
-setTimeout(function () {
-  store.dispatch({type:CHANGE_TITLE,content:'珠1峰'});
+// 宏 常量
+renderApp();
+setTimeout(()=>{
+  store.dispatch({type:CHANGE_TITLE_TEXT,text:'长标题'});
+  renderApp();
 },3000);
+function renderTitle() {
+  let title = document.querySelector('.title');
+  title.innerHTML = store.getState().titleState.text;
+  title.style.color = store.getState().titleState.color;
+}
+function renderContent() {
+  let content = document.querySelector('.content');
+  content.innerHTML = store.getState().contentState.text;
+  content.style.color =store.getState().contentState.color;
+}
+function renderApp() {
+  renderTitle();
+  renderContent();
+}
