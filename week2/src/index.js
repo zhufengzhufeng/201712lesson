@@ -1,14 +1,6 @@
 import React,{Component} from 'react'
 import ReactDOM,{render} from 'react-dom';
-import Counter from "./components/Counter";
-import Todo from "./components/Todo";
+import App from "./components/App";
+import 'bootstrap/dist/css/bootstrap.css'
 
-// react-redux提供了一个Provider组件,这里需要将store传入
-import store from './store'
-import {Provider} from 'react-redux';
-ReactDOM.render(<Provider store={store}>
-  <div>
-    <Counter/>
-    <Todo/>
-  </div>
-</Provider>,window.root);
+ReactDOM.render(<App/>,window.root);
