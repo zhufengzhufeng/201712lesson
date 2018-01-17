@@ -1,12 +1,18 @@
 import React from 'react';
-export default class TodoFooter extends React.Component {
+import {connect} from 'react-redux';
+import actions from '../store/action/index'
+class TodoFooter extends React.Component {
   render(){
     return <div>
-      <nav className="nav nav-pills">
-        <li className="active"><a href="">全部</a></li>
-        <li><a href="">未完成</a></li>
-        <li><a href="">已完成</a></li>
+      <nav className="nav nav-pills" onClick={(e)=>{
+        let result = e.target.dataset.type; //点击的某一个
+        this.props.changeType(result);
+      }}>
+        <li className="active"><a data-type="all">全部</a></li>
+        <li><a data-type="unfinish">未完成</a></li>
+        <li><a data-type="finish">已完成</a></li>
       </nav>
     </div>
   }
 }
+export default connect(state=>({...state}),actions)(TodoFooter);

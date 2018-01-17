@@ -11,7 +11,9 @@ class TodoList extends React.Component {
               this.props.changeSelected(item.id);
             }}/>
             {item.title}
-            <button className="btn btn-xs pull-right">&times;</button>
+            <button className="btn btn-xs pull-right" onClick={()=>{
+              this.props.deleteTodo(item.id);
+            }}>&times;</button>
           </li>
         ))}
       </ul>
