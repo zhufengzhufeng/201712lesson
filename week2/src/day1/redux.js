@@ -28,3 +28,4 @@ let combineReducers = (reducers) =>{ // reducers{counter:fn,todo:fn}
   }
 };
 export {createStore,combineReducers}
+
