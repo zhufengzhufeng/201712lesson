@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import actions from '../store/action/index'
+import TodoItem from "./TodoItem";
 class TodoList extends React.Component {
   filterData(){
     let todos = [];
@@ -17,18 +18,20 @@ class TodoList extends React.Component {
     return <div>
       <ul className="list-group">
         {this.filterData().map((item,index)=>(
-          <li className="list-group-item" key={index}>
-            <input type="checkbox" checked={item.isSelected} onChange={()=>{
-              this.props.changeSelected(item.id);
-            }}/>
-            {item.title}
-            <button className="btn btn-xs pull-right" onClick={()=>{
-              this.props.deleteTodo(item.id);
-            }}>&times;</button>
-          </li>
+          <TodoItem
+            key={index}
+            item={item}
+            changeSelected={(id)=>{ //父级传递给儿子的方法
+                this.props.changeSelected(id); //这里是action中的方法
+            }}
+            deleteTodo={(id)=>{//父级传递给儿子的方法
+                this.props.deleteTodo(id); //这里是action中的方法
+            }}
+          />
         ))}
       </ul>
     </div>
   }
 }
+// 一般情况下 组件分为两类 智能组件（聪明组件） 木偶组件(傻的组件) UI组件
 export default connect(state=>({...state}),actions)(TodoList);
