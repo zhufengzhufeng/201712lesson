@@ -50,11 +50,11 @@ let bindActionCreators = (actions) =>{ //为什么可以直接传入一个action
     let obj = {};
     for(let key in actions){
       obj[key] = (...args)=>{
-        dispatch(actions[key](...args))
+        dispatch(actions[key](...args));
       }
     }
     return obj;
   }
 };
 // connect中的mapDispatchToProps可以传入一个actionCreator对象
-export default connect(state=>({...state.counter}),bindActionCreators(actions))(Counter);//第二次执行的参数是当前组件
+export default connect(state=>({...state.counter}),actions)(Counter);//第二次执行的参数是当前组件
