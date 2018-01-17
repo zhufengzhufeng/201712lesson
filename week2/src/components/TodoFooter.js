@@ -8,9 +8,9 @@ class TodoFooter extends React.Component {
         let result = e.target.dataset.type; //点击的某一个
         this.props.changeType(result);
       }}>
-        <li className="active"><a data-type="all">全部</a></li>
-        <li><a data-type="unfinish">未完成</a></li>
-        <li><a data-type="finish">已完成</a></li>
+        <li className={this.props.type==='all'?'active':''}><a data-type="all">全部</a></li>
+        <li className={this.props.type==='unfinish'?'active':''}><a data-type="unfinish">未完成</a></li>
+        <li className={this.props.type==='finish'?'active':''}><a data-type="finish">已完成</a></li>
       </nav>
     </div>
   }
