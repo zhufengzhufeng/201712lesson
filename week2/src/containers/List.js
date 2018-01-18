@@ -15,7 +15,10 @@ export default class List extends React.Component {
         {userList.map((item,index)=>(
           <tr key={index}>
             <td>{item.id}</td>
-            <td><Link to={{pathname:`/detail/${item.id}`}}>{item.username}</Link></td>
+            <td><Link to={{
+              pathname:`/detail/${item.id}`,
+              state:item // 只是去到那个路由可以取到这个状态，如果在那个页面刷新了状态就丢了
+            }}>{item.username}</Link></td>
           </tr>
         ))}
         </tbody>
