@@ -16,8 +16,8 @@ export default class App extends React.Component {
     return <Router>
       <div>
         {/*当路径匹配时 会渲染对应的组件 路由是从上到下匹配的，/p  /p/1是可以匹配到的*/}
-        <Route path="/p" exact={true} component={Home}/>
-        <Route path="/p/profile" component={Profile}/>
+        <Route path="/" exact={true} component={Home}/>
+        <Route path="/profile" component={Profile}/>
         <Route path="/user" component={User}/>
       </div>
     </Router>
