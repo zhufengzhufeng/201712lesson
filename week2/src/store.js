@@ -10,6 +10,6 @@ function reducer(state={number:0},action) {
   }
   return state;
 }
-let store =createStore(reducer);
+let store =createStore(reducer); // store.getState() =>{number:0}
 window._store = store;
 export default store;
