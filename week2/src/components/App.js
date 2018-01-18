@@ -1,27 +1,25 @@
 import React from 'react';
-import TodoHeader from "./TodoHeader";
-import TodoList from "./TodoList";
-import TodoFooter from "./TodoFooter";
+import Header from "./Header";
+import PropTypes from 'prop-types'
+// 希望App中定义一个color的状态，希望把状态给title来用
+// context上下文，在当前组件下获取其他子组件的上下文
+
+//1.在父级上要定义上下文 ，先要标名上下文的类型
+//2.在父级中获取所有后代的上下文
 export default class App extends React.Component {
+  static childContextTypes = {
+    col:PropTypes.string
+  };
+  getChildContext(){ // 这里返回的结果就是儿子的上下文
+    return {col:this.state.color}
+  }
+  constructor(){
+    super();
+    this.state = {color:'yellowgreen'}
+  }
   render(){
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
-            <div className="panel panel-danger">
-              <div className="panel-heading">
-                <TodoHeader/>
-              </div>
-              <div className="panel-body">
-                <TodoList/>
-              </div>
-              <div className="panel-footer">
-                <TodoFooter/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+    return <div>
+      <Header/>
+    </div>
   }
 }
