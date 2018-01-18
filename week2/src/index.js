@@ -1,9 +1,7 @@
 import React,{Component} from 'react'
 import ReactDOM,{render} from 'react-dom';
-import Counter from "./Counter";
-import {Provider} from './react-redux'
-import store from './store'; // store容器
+import App from "./components/App";
 
-ReactDOM.render(<Provider store={store}>
-  <Counter/>
-</Provider>,window.root);
+
+
+ReactDOM.render(<App/>,window.root);
