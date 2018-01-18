@@ -13,7 +13,8 @@ export default class User extends React.Component {
         </nav>
       </div>
       <div className="col-md-9">
-        {/*二级路由*/}
+        {/*二级路由 当只访问user时显示add组件 */}
+        <Route path="/user" exact={true} component={Add}/>
         <Route path="/user/add" component={Add}/>
         <Route path="/user/list" component={List}/>
       </div>

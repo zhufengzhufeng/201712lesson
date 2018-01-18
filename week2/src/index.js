@@ -8,6 +8,7 @@ import App from "./containers/App";
 import Home from "./containers/Home";
 import Profile from "./containers/Profile";
 import User from "./containers/User";
+import Detail from "./containers/Detail";
 import {HashRouter as Router,Route,Switch,Redirect} from 'react-router-dom'
 // 一般情况下我们在index中配置路由即可
 // swtich的作用让Route匹配后就停止匹配下面的内容
@@ -22,6 +23,11 @@ ReactDOM.render(<Router>
       <Route path="/user" component={User}/>
       /*如果匹配不到会走最后一个路径不会更改*/
       {/*<Route component={Home}/>*/}
+      {/*进入详情页面需要传入一个id /detail/1 /detail/:id
+        this.props.match.params = {id:1}
+        必须要有id 但是可以随机
+      */}
+      <Route path="/detail/:id" component={Detail}/>
       <Redirect to="/"/>
       {/*redirect具有重定向功能*/}
     </Switch>
