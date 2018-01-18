@@ -12,4 +12,17 @@ class Provider extends React.Component{
       return this.props.children
    }
 }
-export {Provider}
+let connect =(mapStateToProps,mapDispatchToProps)=>(Component)=>{
+   return class Proxy extends React.Component{
+      static contextTypes = {
+         store:PropTypes.object
+      };
+      render(){
+         return <Component
+           {...mapStateToProps(this.context.store.getState())}
+           {...mapDispatchToProps(this.context.store.dispatch)}
+         />
+      }
+   }
+};
+export {Provider,connect}

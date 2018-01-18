@@ -1,7 +1,6 @@
 import {createStore} from 'redux'
 const ADD = 'ADD';
 const MINUS = 'MINUS';
-
 function reducer(state={number:0},action) {
   switch (action.type){
     case ADD:
@@ -11,4 +10,6 @@ function reducer(state={number:0},action) {
   }
   return state;
 }
-export default createStore(reducer);
+let store =createStore(reducer);
+window._store = store;
+export default store;
